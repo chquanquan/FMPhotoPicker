@@ -81,7 +81,7 @@ class ViewController: UIViewController, FMPhotoPickerViewControllerDelegate, FMI
         if self.allowImage.isOn { mediaTypes.append(.image) }
         if self.allowVideo.isOn { mediaTypes.append(.video) }
         
-        var config = FMPhotoPickerConfig()
+        var config = FMPhotoPickerConfig.shared
         
         config.selectMode = selectMode
         config.mediaTypes = mediaTypes
@@ -89,6 +89,8 @@ class ViewController: UIViewController, FMPhotoPickerViewControllerDelegate, FMI
         config.maxVideo = self.maxVideo
         config.forceCropEnabled = forceCropEnabled.isOn
         config.eclipsePreviewEnabled = eclipsePreviewEnabled.isOn
+        config.themeColor = UIColor(red: 1, green: 45/255, blue: 137/255, alpha: 1)
+        config.editImageEnabled = false
         
         // in force crop mode, only the first crop option is available
         config.availableCrops = [

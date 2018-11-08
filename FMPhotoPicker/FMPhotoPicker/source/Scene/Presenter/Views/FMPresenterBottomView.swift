@@ -14,7 +14,7 @@ class FMPresenterBottomView: UIView {
     private var shouldReceiveUpdate = true
     
     public var playbackControlView: FMPlaybackControlView
-    public var editMenuView: FMPresenterEditMenuView
+    public var editMenuView: FMPresenterEditMenuView?
     
     public var touchBegan: () -> Void = {} {
         didSet { self.playbackControlView.touchBegan = self.touchBegan }
@@ -24,7 +24,7 @@ class FMPresenterBottomView: UIView {
     }
     
     public var onTapEditButton: () -> Void = {} {
-        didSet { self.editMenuView.onTapEditButton = self.onTapEditButton }
+        didSet { self.editMenuView?.onTapEditButton = self.onTapEditButton }
     }
     
     public var playerProgressDidChange: ((Double) -> Void)?
@@ -35,7 +35,6 @@ class FMPresenterBottomView: UIView {
     
     init(config: FMPhotoPickerConfig) {
         playbackControlView = FMPlaybackControlView()
-        editMenuView = FMPresenterEditMenuView(config: config)
         super.init(frame: .zero)
         
         self.addSubview(playbackControlView)
@@ -49,12 +48,17 @@ class FMPresenterBottomView: UIView {
             self.playbackControlView.playerProgressDidChange(value: percent)
         }
         
-        self.addSubview(editMenuView)
-        editMenuView.translatesAutoresizingMaskIntoConstraints = false
-        editMenuView.heightAnchor.constraint(equalToConstant: 46).isActive = true
-        editMenuView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        editMenuView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        editMenuView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        if config.editImageEnabled {
+            let editMenuView = FMPresenterEditMenuView(config: config)
+            self.addSubview(editMenuView)
+            editMenuView.translatesAutoresizingMaskIntoConstraints = false
+            editMenuView.heightAnchor.constraint(equalToConstant: 46).isActive = true
+            editMenuView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+            editMenuView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+            editMenuView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            self.editMenuView = editMenuView
+        }
+        
     }
     
     public func resetPlaybackControl(cgImages: [CGImage], duration: TimeInterval) {
@@ -64,14 +68,14 @@ class FMPresenterBottomView: UIView {
     }
     
     public func videoMode() {
-        editMenuView.isHidden = true
+        editMenuView?.isHidden = true
         playbackControlView.isHidden = false
         self.shouldReceiveUpdate = true
         resetPlaybackControl(cgImages: [], duration: 0)
     }
     
     public func imageMode() {
-        editMenuView.isHidden = false
+        editMenuView?.isHidden = false
         playbackControlView.isHidden = true
         self.shouldReceiveUpdate = false
     }

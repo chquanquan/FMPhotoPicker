@@ -31,7 +31,7 @@ class FMPhotoPickerImageCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.cellFilterContainer.layer.borderColor = kRedColor.cgColor
+        self.cellFilterContainer.layer.borderColor = FMPhotoPickerConfig.shared.themeColor.cgColor
         self.cellFilterContainer.layer.borderWidth = 2
         self.cellFilterContainer.isHidden = true
         self.videoInfoView.isHidden = true

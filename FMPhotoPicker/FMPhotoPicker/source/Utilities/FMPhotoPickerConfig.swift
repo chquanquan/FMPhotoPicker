@@ -43,6 +43,9 @@ public enum FMMediaType {
 }
 
 public struct FMPhotoPickerConfig {
+    
+    public static let shared = FMPhotoPickerConfig()
+    
     public var mediaTypes: [FMMediaType] = [.image]
     public var selectMode: FMSelectMode = .multiple
     public var maxImage: Int = 10
@@ -53,8 +56,11 @@ public struct FMPhotoPickerConfig {
     
     public var forceCropEnabled = false
     public var eclipsePreviewEnabled = false
+    public var editImageEnabled = true
     
     public var titleFontSize: CGFloat = 17
+    
+    public var themeColor = kRedColor
     
     public var strings: [String: String] = [
         "picker_button_cancel":                     "Cancel",
@@ -80,7 +86,5 @@ public struct FMPhotoPickerConfig {
         "editor_crop_ratioSquare":                  "Square",
     ]
     
-    public init() {
-        
-    }
+    private init() {}
 }

@@ -38,6 +38,8 @@ public class FMImageEditorViewController: UIViewController {
     
     private let isAnimatedPresent: Bool
     
+    private let themeColor = FMPhotoPickerConfig.shared.themeColor
+    
     lazy private var filterSubMenuView: FMFiltersMenuView = {
         let filterSubMenuView = FMFiltersMenuView(withImage: originalThumb.resize(toSizeInPixel: kFilterPreviewImageSize),
                                                   appliedFilter: fmPhotoAsset.getAppliedFilter(),
@@ -176,8 +178,8 @@ public class FMImageEditorViewController: UIViewController {
             self.cropMenuButton.setImage(cropTintIcon, for: .normal)
             
             // default color
-            self.filterMenuButton.setTitleColor(kRedColor, for: .normal)
-            self.filterMenuButton.tintColor = kRedColor
+            self.filterMenuButton.setTitleColor(self.themeColor, for: .normal)
+            self.filterMenuButton.tintColor = self.themeColor
             
             self.cropMenuButton.setTitleColor(kBlackColor, for: .normal)
             self.cropMenuButton.tintColor = kBlackColor
@@ -326,8 +328,8 @@ public class FMImageEditorViewController: UIViewController {
         }
     }
     @IBAction func onTapOpenFilter(_ sender: Any) {
-        filterMenuButton.tintColor = kRedColor
-        filterMenuButton.setTitleColor(kRedColor, for: .normal)
+        filterMenuButton.tintColor = themeColor
+        filterMenuButton.setTitleColor(themeColor, for: .normal)
         cropMenuButton.tintColor = kBlackColor
         cropMenuButton.setTitleColor(kBlackColor, for: .normal)
         
@@ -343,8 +345,8 @@ public class FMImageEditorViewController: UIViewController {
         filterSubMenuView.image = cropView.getCroppedThumbImage()
     }
     @IBAction func onTapOpenCrop(_ sender: Any) {
-        cropMenuButton.tintColor = kRedColor
-        cropMenuButton.setTitleColor(kRedColor, for: .normal)
+        cropMenuButton.tintColor = themeColor
+        cropMenuButton.setTitleColor(themeColor, for: .normal)
         filterMenuButton.tintColor = kBlackColor
         filterMenuButton.setTitleColor(kBlackColor, for: .normal)
         
