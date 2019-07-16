@@ -435,10 +435,11 @@ public class FMImageEditorViewController: UIViewController {
     
     // MARK: - Logics
     private func contentFrameCrop() -> CGRect {
+        let height = 2 * kContentFrameSpacing
         return CGRect(x: kContentFrameSpacing,
                       y: kContentFrameSpacing + transparentViewHeightConstraint.constant,
-                      width: view.bounds.width - 2 * kContentFrameSpacing,
-                      height: view.bounds.height - transparentViewHeightConstraint.constant - bottomMenuContainer.frame.height - subMenuContainer.frame.height - unsafeAreaBottomViewHeightConstraint.constant - 2 * kContentFrameSpacing)
+                      width: view.bounds.width - height,
+                      height: view.bounds.height - transparentViewHeightConstraint.constant - bottomMenuContainer.frame.height - subMenuContainer.frame.height - unsafeAreaBottomViewHeightConstraint.constant - height)
     }
     
     private func contentFrameFilter() -> CGRect {
